@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # 그리고 마지막에 , 꼭 붙이자 !  ex. 'accounts',
     'login.apps.LoginConfig',
     'question.apps.QuestionConfig',
+    'final.apps.FinalConfig',
     
     # django-allauth
     'allauth',
@@ -46,12 +47,6 @@ AUTHENTICATION_BACKENDS=(
 )
 
 # AUTH_USER_MODEL = 'login.User' 
-
-# Login 성공시 URL 경로
-LOGIN_REDIRECT_URL = "/loginsuccess/"
-
-# Logout 성공시 URL 경로
-LOGOUT_REDIRECT_URL = "/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

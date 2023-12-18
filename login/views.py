@@ -1,4 +1,3 @@
-from django.shortcuts import render,redirect
 from django.contrib import auth
 from django.contrib.auth import logout
 from django.views import View
@@ -9,11 +8,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from datetime import date
-
-def member_view(request):
-    members = Member.objects.all()
-    print(members) 
-    return render(request, 'home.html', {"members": members})
 
 # 회원 가입
 class SignUp(viewsets.ModelViewSet):
