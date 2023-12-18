@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     
     # django-allauth
     'allauth',
+    
+    'rest_framework',
 ]
 
 # 사이트는 1개만 사용할 것이라고 명시

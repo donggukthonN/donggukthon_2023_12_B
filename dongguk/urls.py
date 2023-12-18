@@ -18,12 +18,14 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
 from login import views
+from login.views import SignUp, Login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.member_view,name="home"),
-    # path('login/',views.login,name='login'),
-    # path('signup/',views.signup,name='signup'),
+    path('login/',views.Login.login,name='login'),
+    path('signup/duplicate/',views.SignUp.check_duplicate_user,name='duflicate'),
+    path('signup/',views.SignUp.signup,name='signup'),
     # path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     # path('loginsuccess/',views.loginsuccess,name="loginsuccess"),
     # path('account/',include('allauth.urls')),
