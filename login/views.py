@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib import auth
+from django.contrib.auth import logout
+from django.views import View
 from login.models import Member
 from django.http import JsonResponse
 from rest_framework import viewsets
@@ -62,6 +64,3 @@ class Login(viewsets.ModelViewSet):
                 return Response({'success': False, 'message': '비밀번호가 틀렸습니다.'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({'success': False, 'message': '존재하지 않는 ID입니다.'}, status=status.HTTP_400_BAD_REQUEST)
-        
-def loginsuccess(request):
-    return render(request,'loginsuccess.html')

@@ -1,32 +1,16 @@
-"""dongguk URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
-from login import views
-from login.views import SignUp, Login
+from login import views as login_views
+from question import views as question_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.member_view,name="home"),
-    path('login/',views.Login.login,name='login'),
-    path('signup/duplicate/',views.SignUp.check_duplicate_user,name='duflicate'),
-    path('signup/',views.SignUp.signup,name='signup'),
-    # path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
-    # path('loginsuccess/',views.loginsuccess,name="loginsuccess"),
-    # path('account/',include('allauth.urls')),
+    path('',login_views.member_view,name="home"),
+    path('login/',login_views.Login.login,name='login'),
+    path('signup/duplicate/',login_views.SignUp.check_duplicate_user,name='duflicate'),
+    path('signup/',login_views.SignUp.signup,name='signup'),
+    path('<str:u_id>/question/<int:q_id>/',question_views.ShowQuestion.show_question,name="show_question"),
 ]
