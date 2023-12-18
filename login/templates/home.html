@@ -1,0 +1,15 @@
+<h1> Hello, world! </h1>
+{% comment %} <form action="{% url 'login' %}" method="post">
+  {% csrf_token %}
+  <button type="submit">로그인</button>
+</form>
+
+<form action="{% url 'signup' %}" method="post">
+  {% csrf_token %}
+  <button type="submit">회원가입</button>
+</form> {% endcomment %}
+
+{% for member in members %}
+  <h1>{{ member.user_id }}</h1>
+  <h1>{{ member.password }}</h1>
+{% endfor %}
