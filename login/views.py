@@ -53,7 +53,7 @@ class Login(viewsets.ModelViewSet):
         if Member.objects.filter(userId=userId).exists():
             getMember = Member.objects.get(userId=userId)
             if getMember.password == password:
-                return Response({'success': True, 'message': '로그인 되었습니다.'}, status=status.HTTP_200_OK)
+                return Response({'success': True, 'message': '로그인 되었습니다.','userId':userId}, status=status.HTTP_200_OK)
             else:
                 return Response({'success': False, 'message': '비밀번호가 틀렸습니다.'}, status=status.HTTP_400_BAD_REQUEST)
         else:
