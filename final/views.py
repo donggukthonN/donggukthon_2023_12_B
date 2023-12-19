@@ -102,7 +102,7 @@ class AddFriend(viewsets.ModelViewSet):
         reverse_friend = Friend.objects.create(user=friend_member, f_id=u_id)
         reverse_friend.save()
 
-        return Response({'success': True, 'message': 'Friend added successfully'})
+        return Response({'success': True, 'message': 'Friend added successfully', 'f_id':f_id})
 
 class DeleteFriend(viewsets.ModelViewSet):
     queryset = Friend.objects.all()
