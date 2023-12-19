@@ -62,18 +62,22 @@ class GetFriend(viewsets.ModelViewSet):
         friends = Friend.objects.filter(user=user_member)
 
         # friends 데이터 구성
-        friends_data = [{'id': f.f_id} for f in friends]
+        friends_data = []
 
         # Answer 모델의 content 필드 중 하나라도 null 값이 있는지 확인
-        for friend_data in friends_data:
-            friend_member = Member.objects.get(userId=friend_data['id'])
+        for friend in friends:
+            friend_member = Member.objects.get(userId=friend.f_id)
             answer_count = Answer.objects.filter(user=friend_member).exclude(content=None).count()
 
             # Answer 25개가 전부 채워져 있다면 'complete' : 1을 추가, 그렇지 않으면 'complete' : 0을 추가
-            friend_data['complete'] = 1 if answer_count == 25 else 0
+            friend_data = {'id': friend.f_id, 'complete': 1 if answer_count == 25 else 0}
+
+            # f_id에 대한 Member 객체를 가져와서 nickname을 friends_data에 추가
+            friend_data['nickname'] = friend_member.nickname
+
+            friends_data.append(friend_data)
 
         return Response({'friends': friends_data})
-
 
 class AddFriend(viewsets.ModelViewSet):
     queryset = Friend.objects.all()
