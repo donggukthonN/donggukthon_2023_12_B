@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    
     # my app
     # => startapp 해서 만든 걸 추가하면 됨.
     # 그리고 마지막에 , 꼭 붙이자 !  ex. 'accounts',
