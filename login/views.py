@@ -6,33 +6,35 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from datetime import date
+import random
 
-# 회원 가입
-class SignUp(viewsets.ModelViewSet):
+class SignUpDuplicated(viewsets.ModelViewSet):
     queryset = Member.objects.all()
-    
     # id 중복 확인을 위한 메소드
     @api_view(['POST'])
     def check_duplicate_user(request):
         userId=request.data.get('userId')
         try:
             Member.objects.get(userId=userId)
-            return Response({'success': False, 'message': '이미 존재하는 사용자 ID입니다.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': '이미 존재하는 사용자 ID입니다.'}, status=status.HTTP_400_BAD_REQUEST)
         except Member.DoesNotExist:
-            return Response({'success': True, 'message': '사용 가능한 사용자 ID입니다.'}, status=status.HTTP_200_OK)
+            return Response({'message': '사용 가능한 사용자 ID입니다.'}, status=status.HTTP_200_OK)
 
+# 회원 가입
+class SignUp(viewsets.ModelViewSet):
+    queryset = Member.objects.all()
     # 회원 가입을 위한 메소드
     @api_view(['POST'])
     def signup(request):
         userId = request.data.get('userId')
         password = request.data.get('password')
         nickname = request.data.get('nickname')
-        code = request.data.get('code')
-        startDate = date.today()
+        code = random.randint(1000, 9999)
+        startDate = "2023-12-01"
         if userId and password and nickname and code:
             try:
                 existing_user = Member.objects.get(userId=userId)
-                return Response({'success':False},status=status.HTTP_400_BAD_REQUEST)
+                return Response({'success':False,'message': '이미 존재하는 사용자 ID입니다.'},status=status.HTTP_400_BAD_REQUEST)
             except Member.DoesNotExist:
                 member = Member.objects.create(userId = userId,password=password,nickname=nickname,code=code,startDate=startDate)
                 member.save()
