@@ -5,7 +5,6 @@ from question import views as question_views
 from final import views as final_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('login/',login_views.Login.login,name='login'),
     path('signup/duplicate/',login_views.SignUpDuplicated.check_duplicate_user,name='duflicate'),
     path('signup/',login_views.SignUp.signup,name='signup'),
