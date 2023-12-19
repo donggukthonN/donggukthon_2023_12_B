@@ -27,6 +27,7 @@ class PostAnswer(viewsets.ModelViewSet):
 
             # Answer 모델에 데이터 저장
             Answer.objects.create(user=user, num=num, content=content, flag=flag)
+            return Response({'success':True})
             
 class GetCalendar(viewsets.ModelViewSet):
       queryset=Member.objects.all()
