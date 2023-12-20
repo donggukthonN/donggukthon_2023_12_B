@@ -11,15 +11,9 @@ class ShowQuestion(viewsets.ModelViewSet):
       @api_view(['GET'])
       def show_question(request,u_id,q_id):
             question = Question.objects.get(num=q_id)
-            if question.num==23:
-                  content=question.content
-            elif question.num==13:
-                  content=question.get_content_with_newlines2()
-            else:
-                  content=question.get_content_with_newlines()
             question_data = {
                   'questionNum': question.num,
-                  'content': content,
+                  'content': question.content,
             }
             return Response(question_data)
 
@@ -34,7 +28,7 @@ class PostAnswer(viewsets.ModelViewSet):
             # Answer 모델에 데이터 저장
             Answer.objects.create(user=user, num=num, content=content, flag=flag)
             return Response({'success':True})
-            
+
 class GetCalendar(viewsets.ModelViewSet):
       queryset=Member.objects.all()
       @api_view(['GET'])
