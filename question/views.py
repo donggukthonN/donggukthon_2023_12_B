@@ -15,6 +15,7 @@ class ShowQuestion(viewsets.ModelViewSet):
                   'questionNum': question.num,
                   'content': question.get_content_with_newlines(),
             }
+            print(question_data)
             return Response(question_data)
 
 class PostAnswer(viewsets.ModelViewSet):
