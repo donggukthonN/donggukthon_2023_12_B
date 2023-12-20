@@ -11,11 +11,16 @@ class ShowQuestion(viewsets.ModelViewSet):
       @api_view(['GET'])
       def show_question(request,u_id,q_id):
             question = Question.objects.get(num=q_id)
+            if question.num==23:
+                  content=question.content
+            elif question.num==13:
+                  content=question.get_content_with_newlines2()
+            else:
+                  content=question.get_content_with_newlines()
             question_data = {
                   'questionNum': question.num,
-                  'content': question.get_content_with_newlines(),
+                  'content': content,
             }
-            print(question_data)
             return Response(question_data)
 
 class PostAnswer(viewsets.ModelViewSet):
